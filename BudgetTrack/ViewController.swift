@@ -65,12 +65,17 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "buds", for: indexPath)
-        
+        cell.accessoryType = .disclosureIndicator
         let bc = fetchResult.object(at: indexPath)
         var config = cell.defaultContentConfiguration()
         config.text = bc.name
         cell.contentConfiguration = config
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bc = fetchResult.object(at: indexPath)
+        navigationController?.pushViewController(BudgetDetailViewController(budgetCategory: bc, persistentContainer: persistentContainer), animated: true)
     }
 }
 

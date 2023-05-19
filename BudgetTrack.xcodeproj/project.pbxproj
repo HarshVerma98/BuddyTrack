@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		95724F0C2A1748F000FC845F /* AddBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95724F0B2A1748F000FC845F /* AddBudgetViewController.swift */; };
 		95724F102A174F0C00FC845F /* StringsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95724F0F2A174F0C00FC845F /* StringsExt.swift */; };
+		95724F122A17970E00FC845F /* BudgetDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95724F112A17970E00FC845F /* BudgetDetailVC.swift */; };
+		95724F142A1797CA00FC845F /* DoublesExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95724F132A1797CA00FC845F /* DoublesExt.swift */; };
 		95D2F0AC2A0F38F300C3A575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2F0AB2A0F38F300C3A575 /* AppDelegate.swift */; };
 		95D2F0AE2A0F38F300C3A575 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2F0AD2A0F38F300C3A575 /* SceneDelegate.swift */; };
 		95D2F0B02A0F38F300C3A575 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2F0AF2A0F38F300C3A575 /* ViewController.swift */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		95724F0B2A1748F000FC845F /* AddBudgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetViewController.swift; sourceTree = "<group>"; };
 		95724F0F2A174F0C00FC845F /* StringsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsExt.swift; sourceTree = "<group>"; };
+		95724F112A17970E00FC845F /* BudgetDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailVC.swift; sourceTree = "<group>"; };
+		95724F132A1797CA00FC845F /* DoublesExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublesExt.swift; sourceTree = "<group>"; };
 		95D2F0A82A0F38F300C3A575 /* BudgetTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BudgetTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D2F0AB2A0F38F300C3A575 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95D2F0AD2A0F38F300C3A575 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				95D2F0B92A0F38F400C3A575 /* Info.plist */,
 				95724F0B2A1748F000FC845F /* AddBudgetViewController.swift */,
 				95724F0F2A174F0C00FC845F /* StringsExt.swift */,
+				95724F112A17970E00FC845F /* BudgetDetailVC.swift */,
+				95724F132A1797CA00FC845F /* DoublesExt.swift */,
 			);
 			path = BudgetTrack;
 			sourceTree = "<group>";
@@ -145,6 +151,8 @@
 			files = (
 				95D2F0C12A0F39E700C3A575 /* BudgetModel.xcdatamodeld in Sources */,
 				95D2F0B02A0F38F300C3A575 /* ViewController.swift in Sources */,
+				95724F142A1797CA00FC845F /* DoublesExt.swift in Sources */,
+				95724F122A17970E00FC845F /* BudgetDetailVC.swift in Sources */,
 				95724F102A174F0C00FC845F /* StringsExt.swift in Sources */,
 				95D2F0AC2A0F38F300C3A575 /* AppDelegate.swift in Sources */,
 				95D2F0AE2A0F38F300C3A575 /* SceneDelegate.swift in Sources */,
