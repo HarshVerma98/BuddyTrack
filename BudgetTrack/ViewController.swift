@@ -24,11 +24,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
-        
+        setupUI()
+       
         // Do any additional setup after loading the view.
     }
 
 
+    func setupUI() {
+        let addCategory = UIBarButtonItem(title: "Add Category", style: .plain, target: self, action: #selector(didPressAddBudget))
+        navigationItem.rightBarButtonItem = addCategory
+        navigationItem.rightBarButtonItem?.tintColor = .green
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Budget"
+        
+    }
+    
+    @objc func didPressAddBudget(_ sender: UIBarButtonItem) {
+        let nvc = UINavigationController(rootViewController: AddBudgetViewController(container: persistentContainer))
+        present(nvc, animated: true)
+    }
 }
 
