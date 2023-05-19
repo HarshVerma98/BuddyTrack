@@ -94,7 +94,7 @@ class AddBudgetViewController: UIViewController {
     
     @objc func budgetButton(_ sender: UIButton) {
         if validateDataEntry {
-            
+            saveData()
         }else {
             error.text = "Whoops Missing fields"
         }
@@ -107,6 +107,21 @@ class AddBudgetViewController: UIViewController {
         return !name.isEmpty && !amt.isEmpty && amt.isNumeric && amt.isGreaterThan(0)
     }
     
+    private func saveData() {
+        guard let name = nametextField.text, let amt = ampunttextField.text else {
+            return
+        }
+        do {
+            let budgetCat = BudgetCategory(context: container.viewContext)
+            budgetCat.name = name
+            budgetCat.amount = Double(amt) ?? 0.0
+           try container.viewContext.save()
+            dismiss(animated: true)
+        }catch {
+            print("Error Dumping data!!!")
+        }
+        
+    }
 
     
 }

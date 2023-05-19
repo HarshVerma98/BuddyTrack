@@ -8,13 +8,27 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
 
     private var persistentContainer: NSPersistentContainer
+    private var fetchResult: NSFetchedResultsController<BudgetCategory>!
+    
     
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
         super.init(nibName: nil, bundle: nil)
+        
+        var request = BudgetCategory.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        fetchResult = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResult.delegate = self
+        
+        do {
+            try fetchResult.performFetch()
+        }catch {
+            print(error.localizedDescription)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +39,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-       
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "buds")
         // Do any additional setup after loading the view.
     }
 
@@ -43,5 +57,25 @@ class ViewController: UIViewController {
         let nvc = UINavigationController(rootViewController: AddBudgetViewController(container: persistentContainer))
         present(nvc, animated: true)
     }
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (fetchResult.fetchedObjects ?? []).count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "buds", for: indexPath)
+        
+        let bc = fetchResult.object(at: indexPath)
+        var config = cell.defaultContentConfiguration()
+        config.text = bc.name
+        cell.contentConfiguration = config
+        return cell
+    }
 }
 
+extension ViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+    }
+}
