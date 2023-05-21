@@ -17,6 +17,7 @@
 		95D2F0B52A0F38F400C3A575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D2F0B42A0F38F400C3A575 /* Assets.xcassets */; };
 		95D2F0B82A0F38F400C3A575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D2F0B62A0F38F400C3A575 /* LaunchScreen.storyboard */; };
 		95D2F0C12A0F39E700C3A575 /* BudgetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95D2F0BF2A0F39E700C3A575 /* BudgetModel.xcdatamodeld */; };
+		95F79CD62A19BDA4001B254D /* BudgetDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		95D2F0B72A0F38F400C3A575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95D2F0B92A0F38F400C3A575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2F0C02A0F39E700C3A575 /* BudgetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetModel.xcdatamodel; sourceTree = "<group>"; };
+		95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				95724F0F2A174F0C00FC845F /* StringsExt.swift */,
 				95724F112A17970E00FC845F /* BudgetDetailVC.swift */,
 				95724F132A1797CA00FC845F /* DoublesExt.swift */,
+				95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */,
 			);
 			path = BudgetTrack;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D2F0C12A0F39E700C3A575 /* BudgetModel.xcdatamodeld in Sources */,
+				95F79CD62A19BDA4001B254D /* BudgetDetailCell.swift in Sources */,
 				95D2F0B02A0F38F300C3A575 /* ViewController.swift in Sources */,
 				95724F142A1797CA00FC845F /* DoublesExt.swift in Sources */,
 				95724F122A17970E00FC845F /* BudgetDetailVC.swift in Sources */,

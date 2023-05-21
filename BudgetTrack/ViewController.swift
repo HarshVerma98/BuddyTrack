@@ -39,7 +39,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "buds")
+        tableView.register(BudgetDetailCell.self, forCellReuseIdentifier: "buds")
         // Do any additional setup after loading the view.
     }
 
@@ -64,12 +64,15 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "buds", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "buds", for: indexPath) as! BudgetDetailCell
         cell.accessoryType = .disclosureIndicator
-        let bc = fetchResult.object(at: indexPath)
-        var config = cell.defaultContentConfiguration()
-        config.text = bc.name
-        cell.contentConfiguration = config
+//        let bc = fetchResult.object(at: indexPath)
+//        var config = cell.defaultContentConfiguration()
+//        config.text = bc.name
+//        cell.contentConfiguration = config
+        
+        let budgetCat = fetchResult.object(at: indexPath)
+        cell.configure(budgetCat)
         return cell
     }
     
