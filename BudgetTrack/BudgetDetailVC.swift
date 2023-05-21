@@ -11,6 +11,7 @@ import CoreData
 class BudgetDetailViewController: UIViewController {
     
     private var persistentContainer: NSPersistentContainer
+    private var fetchedResultController: NSFetchedResultsController<Transaction>!
     private var budgetCategory: BudgetCategory
     
     lazy var nameTextField: UITextField = {
@@ -63,16 +64,36 @@ class BudgetDetailViewController: UIViewController {
         return label
     }()
     
+    lazy var transactionTotalLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
     
     init(budgetCategory: BudgetCategory, persistentContainer: NSPersistentContainer) {
         self.budgetCategory = budgetCategory
         self.persistentContainer = persistentContainer
         super.init(nibName: nil, bundle: nil)
+        
+        let req = Transaction.fetchRequest()
+        req.predicate = NSPredicate(format: "category = %@", budgetCategory)
+        req.sortDescriptors = [NSSortDescriptor(key: "datecreated", ascending: false)]
+        
+        fetchedResultController = NSFetchedResultsController(fetchRequest: req, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultController.delegate = self
+        
+        do {
+            try fetchedResultController.performFetch()
+        }catch {
+            errorMessageLabel.text = "Failed to Fetch Transaction details"
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        updateTotalTransaction()
     }
     
     required init?(coder: NSCoder) {
@@ -99,6 +120,7 @@ class BudgetDetailViewController: UIViewController {
         stackView.addArrangedSubview(amountTextField)
         stackView.addArrangedSubview(saveTransactionButton)
         stackView.addArrangedSubview(errorMessageLabel)
+        stackView.addArrangedSubview(transactionTotalLabel)
         stackView.addArrangedSubview(tableView)
         
         view.addSubview(stackView)
@@ -108,6 +130,8 @@ class BudgetDetailViewController: UIViewController {
         amountTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         saveTransactionButton.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
         
+        saveTransactionButton.addTarget(self, action: #selector(didPressSaveTransaction), for: .touchUpInside)
+        
         stackView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         
@@ -116,21 +140,100 @@ class BudgetDetailViewController: UIViewController {
         
     }
     
+    
+    private var validateDataEntry: Bool {
+        guard let name = nameTextField.text, let amt = amountTextField.text else {
+            return false
+        }
+        return !name.isEmpty && !amt.isEmpty && amt.isNumeric && amt.isGreaterThan(0)
+    }
+    
+    
+    @objc func didPressSaveTransaction() {
+        if validateDataEntry {
+            saveTransaction()
+            
+            print("Saved to Model")
+        }else {
+            errorMessageLabel.text = "Failed to save transactions!"
+        }
+    }
+    
+    private func saveTransaction() {
+        guard let name = nameTextField.text, let amount = amountTextField.text else {
+            return
+        }
+        
+        let transaction = Transaction(context: persistentContainer.viewContext)
+        transaction.name = name
+        transaction.amount = Double(amount) ?? 0.0
+        transaction.datecreated = Date()
+        
+        budgetCategory.addToTransactions(transaction)
+        
+        do  {
+            try persistentContainer.viewContext.save()
+            nameTextField.text = ""
+            amountTextField.text = ""
+            errorMessageLabel.text = ""
+            tableView.reloadData()
+        }catch {
+            errorMessageLabel.text = "Failed!"
+        }
+    }
+    
+    var totalTransaction: Double {
+        let transact = fetchedResultController.fetchedObjects ?? []
+        return transact.reduce(0) { next, transaction in
+            next + transaction.amount
+        }
+    }
+    
+    private func updateTotalTransaction() {
+        transactionTotalLabel.text = totalTransaction.formatAsCurrency()
+    }
+    
+    private func deleteTransactions(_ transaction: Transaction) {
+        persistentContainer.viewContext.delete(transaction)
+        
+        do {
+            try persistentContainer.viewContext.save()
+        }catch {
+            errorMessageLabel.text = "Failed to delete Transaction"
+        }
+    }
+    
 }
 
-extension BudgetDetailViewController: UITableViewDataSource {
+extension BudgetDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return (fetchedResultController.fetchedObjects ?? []).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath)
+        let trans = fetchedResultController.object(at: indexPath)
+        var config = cell.defaultContentConfiguration()
+        config.text = trans.name
+        config.secondaryText = trans.amount.formatAsCurrency()
+        cell.contentConfiguration = config
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let transacts = fetchedResultController.object(at: indexPath)
+            deleteTransactions(transacts)
+        }
     }
     
 }
 
-extension BudgetDetailViewController: UITableViewDelegate {
-    
+
+extension BudgetDetailViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateTotalTransaction()
+        tableView.reloadData()
+    }
 }

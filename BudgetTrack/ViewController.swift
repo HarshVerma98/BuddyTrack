@@ -18,7 +18,7 @@ class ViewController: UITableViewController {
         self.persistentContainer = persistentContainer
         super.init(nibName: nil, bundle: nil)
         
-        var request = BudgetCategory.fetchRequest()
+        let request = BudgetCategory.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         fetchResult = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
