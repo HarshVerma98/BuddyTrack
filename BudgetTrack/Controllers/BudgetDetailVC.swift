@@ -181,16 +181,17 @@ class BudgetDetailViewController: UIViewController {
             errorMessageLabel.text = "Failed!"
         }
     }
-    
-    var totalTransaction: Double {
-        let transact = fetchedResultController.fetchedObjects ?? []
-        return transact.reduce(0) { next, transaction in
-            next + transaction.amount
-        }
-    }
+//    
+//    var totalTransaction: Double {
+//        let transact = fetchedResultController.fetchedObjects ?? []
+//        return transact.reduce(0) { next, transaction in
+//            next + transaction.amount
+//        }
+//    }
     
     private func updateTotalTransaction() {
-        transactionTotalLabel.text = totalTransaction.formatAsCurrency()
+      //  transactionTotalLabel.text = totalTransaction.formatAsCurrency()
+        transactionTotalLabel.text = budgetCategory.totalTransaction.formatAsCurrency()
     }
     
     private func deleteTransactions(_ transaction: Transaction) {

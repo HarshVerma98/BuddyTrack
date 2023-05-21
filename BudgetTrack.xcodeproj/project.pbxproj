@@ -18,6 +18,9 @@
 		95D2F0B82A0F38F400C3A575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D2F0B62A0F38F400C3A575 /* LaunchScreen.storyboard */; };
 		95D2F0C12A0F39E700C3A575 /* BudgetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95D2F0BF2A0F39E700C3A575 /* BudgetModel.xcdatamodeld */; };
 		95F79CD62A19BDA4001B254D /* BudgetDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */; };
+		95F79CD82A19C7E7001B254D /* BudgetCategoryCDClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F79CD72A19C7E7001B254D /* BudgetCategoryCDClass.swift */; };
+		95F79CDA2A19CA0B001B254D /* SetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F79CD92A19CA0B001B254D /* SetExtensions.swift */; };
+		95F79CDC2A19CDEE001B254D /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F79CDB2A19CDEE001B254D /* AlertExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		95D2F0B92A0F38F400C3A575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2F0C02A0F39E700C3A575 /* BudgetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetModel.xcdatamodel; sourceTree = "<group>"; };
 		95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailCell.swift; sourceTree = "<group>"; };
+		95F79CD72A19C7E7001B254D /* BudgetCategoryCDClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoryCDClass.swift; sourceTree = "<group>"; };
+		95F79CD92A19CA0B001B254D /* SetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetExtensions.swift; sourceTree = "<group>"; };
+		95F79CDB2A19CDEE001B254D /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,20 +72,47 @@
 		95D2F0AA2A0F38F300C3A575 /* BudgetTrack */ = {
 			isa = PBXGroup;
 			children = (
+				95F79CDD2A19CF2E001B254D /* Extensions */,
 				95D2F0AB2A0F38F300C3A575 /* AppDelegate.swift */,
 				95D2F0AD2A0F38F300C3A575 /* SceneDelegate.swift */,
-				95D2F0AF2A0F38F300C3A575 /* ViewController.swift */,
+				95F79CDE2A19CF45001B254D /* Controllers */,
 				95D2F0BF2A0F39E700C3A575 /* BudgetModel.xcdatamodeld */,
 				95D2F0B42A0F38F400C3A575 /* Assets.xcassets */,
 				95D2F0B62A0F38F400C3A575 /* LaunchScreen.storyboard */,
 				95D2F0B92A0F38F400C3A575 /* Info.plist */,
-				95724F0B2A1748F000FC845F /* AddBudgetViewController.swift */,
-				95724F0F2A174F0C00FC845F /* StringsExt.swift */,
-				95724F112A17970E00FC845F /* BudgetDetailVC.swift */,
-				95724F132A1797CA00FC845F /* DoublesExt.swift */,
-				95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */,
+				95F79CD72A19C7E7001B254D /* BudgetCategoryCDClass.swift */,
+				95F79CDF2A19CF57001B254D /* CustomCell */,
 			);
 			path = BudgetTrack;
+			sourceTree = "<group>";
+		};
+		95F79CDD2A19CF2E001B254D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95F79CD92A19CA0B001B254D /* SetExtensions.swift */,
+				95724F0F2A174F0C00FC845F /* StringsExt.swift */,
+				95724F132A1797CA00FC845F /* DoublesExt.swift */,
+				95F79CDB2A19CDEE001B254D /* AlertExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		95F79CDE2A19CF45001B254D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				95D2F0AF2A0F38F300C3A575 /* ViewController.swift */,
+				95724F0B2A1748F000FC845F /* AddBudgetViewController.swift */,
+				95724F112A17970E00FC845F /* BudgetDetailVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		95F79CDF2A19CF57001B254D /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				95F79CD52A19BDA4001B254D /* BudgetDetailCell.swift */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +189,10 @@
 				95F79CD62A19BDA4001B254D /* BudgetDetailCell.swift in Sources */,
 				95D2F0B02A0F38F300C3A575 /* ViewController.swift in Sources */,
 				95724F142A1797CA00FC845F /* DoublesExt.swift in Sources */,
+				95F79CDC2A19CDEE001B254D /* AlertExtension.swift in Sources */,
+				95F79CD82A19C7E7001B254D /* BudgetCategoryCDClass.swift in Sources */,
 				95724F122A17970E00FC845F /* BudgetDetailVC.swift in Sources */,
+				95F79CDA2A19CA0B001B254D /* SetExtensions.swift in Sources */,
 				95724F102A174F0C00FC845F /* StringsExt.swift in Sources */,
 				95D2F0AC2A0F38F300C3A575 /* AppDelegate.swift in Sources */,
 				95D2F0AE2A0F38F300C3A575 /* SceneDelegate.swift in Sources */,

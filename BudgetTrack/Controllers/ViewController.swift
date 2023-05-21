@@ -10,6 +10,7 @@ import CoreData
 
 class ViewController: UITableViewController {
 
+    //MARK: - Properties
     private var persistentContainer: NSPersistentContainer
     private var fetchResult: NSFetchedResultsController<BudgetCategory>!
     
@@ -36,6 +37,7 @@ class ViewController: UITableViewController {
     }
     
     
+    //MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -43,6 +45,7 @@ class ViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
 
+    //MARK: - User Defined Functions
 
     func setupUI() {
         let addCategory = UIBarButtonItem(title: "Add Category", style: .plain, target: self, action: #selector(didPressAddBudget))
@@ -53,11 +56,22 @@ class ViewController: UITableViewController {
         
     }
     
+    func deleteCategory(_ budgetCategory: BudgetCategory) {
+        persistentContainer.viewContext.delete(budgetCategory)
+        
+        do {
+            try persistentContainer.viewContext.save()
+        }catch {
+            showErrorMessage(title: "Whoops😮‍💨😮‍💨", message: "Failed to delete Category😞")
+        }
+    }
+    
     @objc func didPressAddBudget(_ sender: UIBarButtonItem) {
         let nvc = UINavigationController(rootViewController: AddBudgetViewController(container: persistentContainer))
         present(nvc, animated: true)
     }
     
+    //MARK: - Table View Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (fetchResult.fetchedObjects ?? []).count
@@ -80,8 +94,16 @@ class ViewController: UITableViewController {
         let bc = fetchResult.object(at: indexPath)
         navigationController?.pushViewController(BudgetDetailViewController(budgetCategory: bc, persistentContainer: persistentContainer), animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let budCat = fetchResult.object(at: indexPath)
+            deleteCategory(budCat)
+        }
+    }
 }
 
+//MARK: - Extension for Core Data
 extension ViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()

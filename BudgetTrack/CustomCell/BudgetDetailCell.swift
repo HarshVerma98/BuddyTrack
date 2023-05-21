@@ -70,7 +70,7 @@ class BudgetDetailCell: UITableViewCell {
     func configure(_ budget: BudgetCategory) {
         nameLabel.text = budget.name
         amountLabel.text = budget.amount.formatAsCurrency()
-        remainingLabel.text = "Remaining 50"
+        remainingLabel.text = "Remaining \(budget.remainingAmount.formatAsCurrency())"
     }
 }
 
